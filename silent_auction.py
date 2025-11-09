@@ -30,21 +30,33 @@ more_bids = True
 welcome = "Welcome to the silent auchion, where each contendents needs to give a bid, and the highest bid will win."
 highest_bidder = ""
 
-print(f"{gavel} \n {welcome}")
-while more_bids:
-    name = input("What is your name?")
-    bid = int(input("What is your bid?"))
-    bids[name] = bid
+def main():
+    global bids, more_bids, welcome, highest_bidder
+    print(f"{gavel} \n {welcome}")
+    while more_bids:
+        name = input("What is your name? ")
+        bid = int(input("What is your bid? $"))
+        bids[name] = bid
 
-    more_bidder = input("Are there any other bidders? Type 'yes' or 'no'")
-    if more_bids.lower() == "yes":
-        more_bids = True
-    elif more_bids.lower() == "no":
-        more_bids = False
-    else:
-        print("Incorrect, the program exits.")
-        break
+        more_bidder = input("Are there any other bidders? Type 'yes' or 'no'. \n")
+        if more_bidder.lower() == "yes":
+            more_bidder = True
+            for i in range(100):
+                print("\n")
+        elif more_bidder.lower() == "no":
+            more_bids = False
+        else:
+            print("Incorrect, the program exits.")
+            return
 
-# TODO - capture highest bidder, run through dict
-for name in bids:
-    pass
+    # TODO - capture highest bidder, run through dict
+    for name in bids:
+        try:
+            if bids[name] > bids[highest_bidder]:
+                highest_bidder = name
+        except:
+            highest_bidder = name
+    print(f"The winner is {highest_bidder} with bid of ${bids[highest_bidder]}.")
+
+if __name__ == "__main__":
+    main()
